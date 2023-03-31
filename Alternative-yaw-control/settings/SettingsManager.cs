@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 using System.Collections.Generic;
 
-using Alternative_throttle_control.user_interfaces.creators.resources.structs;
+using Alternative_yaw_control.user_interfaces.creators.resources.structs;
 
-namespace Alternative_throttle_control.settings
+namespace Alternative_yaw_control.settings
 {
     internal sealed class SettingsManager
     {

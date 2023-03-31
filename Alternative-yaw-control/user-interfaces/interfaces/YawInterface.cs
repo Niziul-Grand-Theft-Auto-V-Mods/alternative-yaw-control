@@ -5,9 +5,9 @@ using GTAFont
 
 using System.Drawing;
 
-using Alternative_throttle_control.settings;
+using Alternative_yaw_control.settings;
 
-using Alternative_throttle_control.user_interfaces.managers;
+using Alternative_yaw_control.user_interfaces.managers;
 
 namespace Alternative_yaw_control.user_interfaces.interfaces
 {

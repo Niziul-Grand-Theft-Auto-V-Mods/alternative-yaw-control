@@ -1,9 +1,9 @@
 ﻿using GTA.UI;
 
-using Alternative_throttle_control.user_interfaces.creators.resources.structs;
+using Alternative_yaw_control.user_interfaces.creators.resources.structs;
 
 
-namespace Alternative_throttle_control.user_interfaces.creators
+namespace Alternative_yaw_control.user_interfaces.creators
 {
     internal abstract class TextElementCreator
     {
