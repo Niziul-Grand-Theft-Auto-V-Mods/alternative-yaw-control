@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 
-using Alternative_throttle_control.user_interfaces.creators.resources.interfaces;
+using Alternative_yaw_control.user_interfaces.creators.resources.interfaces;
 
 
-namespace Alternative_throttle_control.user_interfaces.creators.resources.structs
+namespace Alternative_yaw_control.user_interfaces.creators.resources.structs
 {
     internal struct StTextElementConfiguration : IConfiguration
     {

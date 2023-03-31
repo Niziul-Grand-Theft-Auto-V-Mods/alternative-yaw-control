@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Alternative_throttle_control.user_interfaces.creators.resources.interfaces
+namespace Alternative_yaw_control.user_interfaces.creators.resources.interfaces
 {
     internal interface IConfiguration
     {

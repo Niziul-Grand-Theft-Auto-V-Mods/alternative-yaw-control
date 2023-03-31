@@ -1,14 +1,15 @@
 ﻿using GTA;
 
-using Alternative_throttle_control.settings;
+using Alternative_yaw_control.settings;
 
 using Alternative_yaw_control.user_interfaces.interfaces;
 
 namespace Alternative_yaw_control.user_interfaces
 {
-    internal sealed class UserInterface : Script
+    [ScriptAttributes(NoDefaultInstance = true)]
+    internal sealed class UserInterfaces : Script
     {
-        public UserInterface()
+        public UserInterfaces()
         {
             var yawInterface
                 = new YawInterface();
@@ -24,29 +25,20 @@ namespace Alternative_yaw_control.user_interfaces
 
             Tick += (o, e) =>
             {
-                if (Game.IsLoading)
+                if (Game
+                        .IsControlJustPressed(Control
+                                                .VehicleExit))
                 {
+                    Wait(5000);
+
                     return;
                 }
 
-                switch (Game.Player.Character.IsInFlyingVehicle)
-                {
-                    case true:
-                        {
-                            yawInterface
-                                .BuildTheInterface();
-                            
-                            yawInterface
-                                .ShowTheInterface();
-                        }
-                        return;
-                    case false:
-                        {
-                            yawInterface
-                                .RemoveTheInterface();
-                        }
-                        return;
-                }
+                yawInterface
+                    .BuildTheInterface();
+
+                yawInterface
+                    .ShowTheInterface();
             };
 
             Aborted += (o, e) =>

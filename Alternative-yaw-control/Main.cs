@@ -1,155 +1,105 @@
-﻿using GTA;
-using GTAControl
-      = GTA.Control;
-
-using System.Windows.Forms;
-
-using CTimer
-      = Alternative_yaw_control.tools.Timer;
-
-using Alternative_throttle_control.settings;
+﻿using Alternative_yaw_control.script;
+using Alternative_yaw_control.user_interfaces;
+using GTA;
 
 namespace Alternative_yaw_control
 {
-    internal class Main : Script
+    internal sealed class Main : Script
     {
-        private readonly Keys _keyForTheYawRigth;
+        private AlternativeYawControl _alternativeYawControl;
 
-        private readonly Keys _keyForTheYawLeft;
-
-        private float _yawSensitivity;
-
-        private float _yawRigthValue;
-
-        private float _yawLeftValue;
+        private UserInterfaces _userInterfaces;
 
         public Main()
         {
-            var keyThatDeterminesTheIncreaseOrDecreaseOfTheValues
-                = Keys.NumPad2;
-
-            var timer
-                = new CTimer();
-
-            var settingsManager
-                = new SettingsManager();
-
-            _keyForTheYawRigth
-                = settingsManager
-                    .ReturnTheKeyForTheYawRight();
-
-            _keyForTheYawLeft
-                = settingsManager
-                    .ReturnTheKeyForTheYawLeft();
-
-            _yawSensitivity
-                = settingsManager
-                    .ReturnTheYawSensitivity();
-
-            _yawRigthValue
-                = 0.25f;
-            _yawLeftValue
-                = 0.25f;
-
-            Tick    += (o, e) =>
+            Tick += (o, e) =>
             {
+                if (Game.IsLoading)
+                {
+                    return;
+                }
+
                 switch (Game.Player.Character.IsInFlyingVehicle)
                 {
-                    case false:
-                        {
-                            if (_yawRigthValue != 0.25f)
-                                _yawRigthValue = 0.25f;
-
-                            if (_yawLeftValue != 0.25f)
-                                _yawLeftValue = 0.25f;
-                        }
-                        return;
                     case true:
                         {
-                            Game
-                                .SetControlValueNormalized(GTAControl
-                                                                .VehicleFlyYawRight, _yawRigthValue);
-                            Game
-                                .SetControlValueNormalized(GTAControl
-                                                                .VehicleFlyYawLeft, _yawLeftValue);
-
-
-                            if (Game
-                                    .IsKeyPressed(_keyForTheYawRigth))
+                            if (_alternativeYawControl is null
+                                ||
+                                _userInterfaces is null)
                             {
-                                if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == _keyForTheYawRigth)
-                                {
-                                    if (_yawRigthValue > 1f)
-                                        _yawRigthValue = 1f;
+                                _alternativeYawControl
+                                    = InstantiateScript<AlternativeYawControl>();
 
-                                    if (_yawRigthValue < 1f)
-                                        _yawRigthValue += _yawSensitivity;
-                                }
+                                _userInterfaces
+                                    = InstantiateScript<UserInterfaces>();
 
-                                if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == _keyForTheYawLeft)
-                                {
-                                    if (_yawLeftValue < 0.25f)
-                                        _yawLeftValue = 0.25f;
+                                _alternativeYawControl
+                                    .Resume();
 
-                                    if (timer
-                                            .ReturnsTrueForEach(1))
-                                    {
-                                        if (_yawLeftValue == 0.25f)
-                                            keyThatDeterminesTheIncreaseOrDecreaseOfTheValues = Keys.NumPad2;
-                                    }
-
-                                    if (_yawLeftValue > 0.25f)
-                                        _yawLeftValue -= _yawSensitivity;
-                                }
-
-                                return;
+                                _userInterfaces
+                                    .Resume();
                             }
 
-                            if (Game
-                                    .IsKeyPressed(_keyForTheYawLeft))
+                            if (_alternativeYawControl.IsPaused
+                                ||
+                                _userInterfaces.IsPaused)
                             {
-                                if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == _keyForTheYawRigth)
-                                {
-                                    if (_yawRigthValue < 0.25f)
-                                        _yawRigthValue = 0.25f;
+                                _alternativeYawControl
+                                    .Resume();
 
-                                    if (timer
-                                            .ReturnsTrueForEach(1))
-                                    {
-                                        if (_yawRigthValue == 0.25f)
-                                            keyThatDeterminesTheIncreaseOrDecreaseOfTheValues = Keys.NumPad2;
-                                    }
-
-                                    if (_yawRigthValue > 0.25f)
-                                        _yawRigthValue -= _yawSensitivity;
-                                }
-
-                                if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == _keyForTheYawLeft)
-                                {
-                                    if (_yawLeftValue > 1f)
-                                        _yawLeftValue = 1f;
-
-                                    if (_yawLeftValue < 1f)
-                                        _yawLeftValue += _yawSensitivity;
-                                }
-                                return;
+                                _userInterfaces
+                                    .Resume();
                             }
                         }
                         return;
-                } 
+                    case false:
+                        {
+                            if (_alternativeYawControl is null
+                                ||
+                                _userInterfaces is null)
+                            {
+                                return;
+                            }
+
+                            if (_alternativeYawControl.IsPaused
+                                ||
+                                _userInterfaces.IsPaused)
+                            {
+                                return;
+                            }
+
+                            _alternativeYawControl
+                                .Pause();
+
+                            _userInterfaces
+                                .Pause();
+                        }
+                        return;
+                }
+
+                Interval = 2000;
             };
 
-            KeyDown += (o, e) =>
+            Aborted += (o, e) =>
             {
-                if (e.KeyCode == _keyForTheYawRigth
+                if (_alternativeYawControl is null
                     ||
-                    e.KeyCode == _keyForTheYawLeft)
+                    _userInterfaces is null)
                 {
-                    if (keyThatDeterminesTheIncreaseOrDecreaseOfTheValues == Keys.NumPad2)
-                    {
-                        keyThatDeterminesTheIncreaseOrDecreaseOfTheValues = e.KeyCode;
-                    }
+                    return;
                 }
+
+                _alternativeYawControl
+                    .Abort();
+
+                _userInterfaces
+                    .Abort();
+
+                _alternativeYawControl
+                    = null;
+
+                _userInterfaces
+                    = null;
             };
         }
     }

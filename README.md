@@ -1,28 +1,20 @@
-<p>
-  <a href="https://www.gta5-mods.com/scripts/alternative-yaw-control-keyboards#description_tab" target="_blank"><img alt="Alternative Yaw Control - Keyboards" src="https://img.gta5-mods.com/q95/images/alternative-yaw-control-keyboards/d21f29-alternative-yaw-control.png"/></a>
-</p>
+<p><a href="https://www.gta5-mods.com/scripts/alternative-yaw-control-keyboards#description_tab" target="_blank"><img alt="Alternative Yaw Control - Keyboards" src="https://img.gta5-mods.com/q95/images/alternative-yaw-control-keyboards/d21f29-alternative-yaw-control.png" /></a></p>
 
 <p><strong>About the mod</strong></p>
 
-<p>
-  Alternate yaw control is a mod where you can have more control over aircraft yaw, by adding an alternative to the yaw control the yaw is interpreted, the result will vary depending on how the handling has been configured.
-</p>
+<p>Alternate yaw control is a mod where you can have more control over aircraft yaw, by adding an alternative to the yaw control the yaw is interpreted, the result will vary depending on how the handling has been configured.</p>
 
-<p>
-  <strong>Requisites</strong>
-</p>
+<p><strong>Requisites</strong></p>
 
 <ul>
 	<li><a href="http://www.dev-c.com/gtav/scripthookv/" target="_blank">Script Hook V - [v1.0.2699.16]</a></li>
 	<li><a href="https://github.com/crosire/scripthookvdotnet/releases" target="_blank">Script Hook V DotNet - [v3.5.1]</a></li>
 </ul>
 
-<p>
-  <strong>Control</strong>
-</p>
+<p><strong>Control</strong></p>
 
 <ul>
-	<li>By default you can use &quot;<em>NumPad3</em>&quot; to yaw to the right and &quot;<em>NumPad1</em>&quot; to yaw to the left.</li>
+	<li>By default you can use &quot;<em>D</em>&quot; to yaw to the right and &quot;<em>A</em>&quot; to yaw to the left.</li>
 	<li>Remember that you can make the following changes inside &quot;<em>AlternativeYawControl/</em><em>ScriptBehavior.ini</em>&quot;:
 	<ul>
 		<li>Change the keys;</li>
@@ -31,9 +23,7 @@
 	</li>
 </ul>
 
-<p>
-  <strong>Featured</strong>
-</p>
+<p><strong>Featured</strong></p>
 
 <ul>
 	<li>More assertive aircraft yaw control;</li>
@@ -54,29 +44,35 @@
 	</li>
 </ul>
 
-<p>
-  <strong>Installation</strong>
-</p>
+<p><strong>Installation</strong></p>
 
 <ol>
-  <li>Access the mod page to download the necessary files by clicking on the image that is at the top of the file.;</li>
+	<li>Access the mod page to download the necessary files by clicking on the image that is at the top of the file.;</li>
 	<li>Extract from the .rar file the <em>Alternative-yaw-control.dll</em> file and the folder named <em>AlternativeYawControl</em>;</li>
 	<li>Place the extracted files in your script folder;</li>
 </ol>
 
-<p>
-  <strong>Changelog</strong>
-</p>
+<p><strong>Changelog</strong></p>
 
 <ul>
-	<li>[v0.1.0.1]
+	<li>[0.1.0.2]
 	<ul>
-		<li>Fix bug "System.IndexOutOfRangeExceptio".</li>
+		<li>Correction for poor script performance at low frame rates;
+		<ul>
+			<li>This means that the script will work as intended no matter how poorly the game is performing.</li>
+		</ul>
+		</li>
+		<li>Code improvements in general;</li>
 	</ul>
 	</li>
-	<li>[v0.1.0.0]
+	<li>[0.1.0.1]
 	<ul>
-		<li>initial release</li>
+		<li>Fix bug &quot;System.IndexOutOfRangeException&quot;;</li>
+	</ul>
+	</li>
+	<li>[0.1.0.0]
+	<ul>
+		<li>Initial release;</li>
 	</ul>
 	</li>
 </ul>
